@@ -251,7 +251,7 @@ NextRR:
     Next rr
 
     Dim cikliStartCol As Long
-    cikliStartCol = 2 ' B
+    cikliStartCol = PrevFirstDateCol ' poravnano z datumskim stolpcem (npr. E)
 
     '========================================
     ' 7) Output matrika

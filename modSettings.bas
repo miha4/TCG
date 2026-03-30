@@ -52,8 +52,8 @@ Public Type TOfficeSettings
     PrevFirstDateCol As Long
     CounterGreaterThan As Long
     OverwriteShiftsCsv As String  ' npr "X1,X2"
-    AllowCopyEmptyAsDelete As Boolean ' Èe bo kdaj rabil
-    CountAllShiftsForWorkday As Boolean  ' "Prepiši izmene" DA/NE
+    AllowCopyEmptyAsDelete As Boolean ' Ãˆe bo kdaj rabil
+    CountAllShiftsForWorkday As Boolean  ' "PrepiÅ¡i izmene" DA/NE
     DebugUI As Boolean
     OfficeModelMode As String      ' "GLOBAL" / "SEQUENTIAL"
     WeightSurplus As Double         ' UTEZI
@@ -128,11 +128,10 @@ Public Function LoadMainSettings(ByVal wsSet As Worksheet) As TMainSettings
     LogStep "Get COL_LIC":            s.colLicenseG = GetLongOptionalAny(wsSet, 0, "GAMA.COL_LICENSE", "Stolpec licence v GAMA")
     LogStep "Get PrevFirstDateCol":   s.PrevFirstDateCol = GetLongRequiredAny(wsSet, 1, "PREVIEW.COL_FIRST_DATE", "Prvi stolpec datumov v PREDOGLED", "prvi stolpec datumov v PREDOGLED")
     LogStep "Get PrevFirstDataRow":   s.PrevFirstDataRow = GetLongRequiredAny(wsSet, 1, "PREVIEW.ROW_FIRST_EMP", "Prva vrstica zaposlenih v PREDOGLED")
-    LogStep "Get START_DATE":         s.startDate = GetDateRequiredAny(wsSet, "COMMON.START_DATE", "ZAÈETNI DATUM")
-    LogStep "Get END_DATE":           s.endDate = GetDateRequiredAny(wsSet, "COMMON.END_DATE", "KONÈNI DATUM")
-    LogStep "Get GamaStartDateCol":   s.GamaStartDateCol = GetLongRequiredAny(wsSet, -999, "GAMA.COL_START_DATE", "Prvi stolpec datuma v GAMA (SE PRERAÈUNA AVTOMATSKO)")
+
+    LogStep "Get GamaStartDateCol":   s.GamaStartDateCol = GetLongRequiredAny(wsSet, -999, "GAMA.COL_START_DATE", "Prvi stolpec datuma v GAMA (SE PRERAÃˆUNA AVTOMATSKO)")
     LogStep "Get selectedUnits":      s.selectedUnitsText = GetTextOptionalAny(wsSet, "", "FACTORY.SELECTED_UNITS", "Planirane enote (OKZP, FIS, FDT, BRN, MBX, POW, CEK)")
-    LogStep "Get excludedTypes":      s.excludedTypesCsv = GetTextOptionalAny(wsSet, "", "FACTORY.EXCLUDED_OJT", "Izloèeni glede na OJT filter")
+    LogStep "Get excludedTypes":      s.excludedTypesCsv = GetTextOptionalAny(wsSet, "", "FACTORY.EXCLUDED_OJT", "IzloÃ¨eni glede na OJT filter")
 
 
     LoadMainSettings = s
@@ -145,22 +144,22 @@ Public Function LoadOfficeSettings(ByVal wsSet As Worksheet) As TOfficeSettings
     LogStep "Get PrevFirstDataRow":     o.PrevFirstDataRow = GetLongRequiredAny(wsSet, 1, "PREVIEW.ROW_FIRST_EMP", "Prva vrstica zaposlenih v PREDOGLED")
     LogStep "Get PrevColID":            o.PrevColID = GetLongRequiredAny(wsSet, 2, "PREVIEW.COL_ID", "Stolpec ID v PREDOGLED")
     LogStep "Get PrevFirstDateCol":     o.PrevFirstDateCol = GetLongRequiredAny(wsSet, 1, "PREVIEW.COL_FIRST_DATE", "Prvi stolpec datumov v PREDOGLED", "prvi stolpec datumov v PREDOGLED")
-    LogStep "Get CounterGreaterThan":   o.CounterGreaterThan = GetLongOptionalAny(wsSet, 0, "OFFICE.COUNTER_GT", "Števec veèji od", "Stevec veèji od")
-    LogStep "Get OverwriteShiftsCsv":    o.OverwriteShiftsCsv = GetTextOptionalAny(wsSet, "", "OFFICE.OVERWRITE_SHIFTS", "Prepiši izmene")
-    LogStep "Get CountAllShiftsForWorkday":   o.CountAllShiftsForWorkday = ParseBool(GetTextOptionalAny(wsSet, "DA", "OFFICE.COUNT_ALL_SHIFTS", "Štej vse izmene (DA/NE)"))
+    LogStep "Get CounterGreaterThan":   o.CounterGreaterThan = GetLongOptionalAny(wsSet, 0, "OFFICE.COUNTER_GT", "Å tevec veÃ¨ji od", "Stevec veÃ¨ji od")
+    LogStep "Get OverwriteShiftsCsv":    o.OverwriteShiftsCsv = GetTextOptionalAny(wsSet, "", "OFFICE.OVERWRITE_SHIFTS", "PrepiÅ¡i izmene")
+    LogStep "Get CountAllShiftsForWorkday":   o.CountAllShiftsForWorkday = ParseBool(GetTextOptionalAny(wsSet, "DA", "OFFICE.COUNT_ALL_SHIFTS", "Å tej vse izmene (DA/NE)"))
     LogStep "Get DebugUI":              o.DebugUI = ParseBool(GetTextOptionalAny(wsSet, "NE", "OFFICE.DEBUG_UI", "DEBUG UI (DA/NE)"))
     LogStep "Get OfficeModelMode":       o.OfficeModelMode = UCase$(Trim$(GetTextOptionalAny(wsSet, "GLOBAL", "OFFICE.MODEL", "Office model (GLOBAL / SEQUENTIAL):")))
-    LogStep "Get WeightSurplus":        o.WeightSurplus = GetDoubleOptionalAny(wsSet, 0.5, "OFFICE.W_SURPLUS", "Utež viški")
-    LogStep "Get WeightMonthlyPct":     o.WeightMonthlyPct = GetDoubleOptionalAny(wsSet, 0.5, "OFFICE.W_MONTHLY_PCT", "Utež meseèni odstotek")
+    LogStep "Get WeightSurplus":        o.WeightSurplus = GetDoubleOptionalAny(wsSet, 0.5, "OFFICE.W_SURPLUS", "UteÅ¾ viÅ¡ki")
+    LogStep "Get WeightMonthlyPct":     o.WeightMonthlyPct = GetDoubleOptionalAny(wsSet, 0.5, "OFFICE.W_MONTHLY_PCT", "UteÅ¾ meseÃ¨ni odstotek")
 
-        ' --- Periodièni sestanki ---
-        ' ta je še ostala, iz navodila smo že dali
+        ' --- PeriodiÃ¨ni sestanki ---
+        ' ta je Å¡e ostala, iz navodila smo Å¾e dali
     LogStep "Get MeetActive":    o.MeetActive = ParseBool(GetTextOptionalAny(wsSet, "DA", "MEETING.ACTIVE", "AKTIVACIJA MAKROJA (DA / NE)", "Aktivacija makroja (DA / NE)"))
     LogStep "Get MeetName":      o.MeetName = Trim$(GetTextOptionalAny(wsSet, "Sestanek", "MEETING.NAME", "Ime sestanka za log in komentar"))
     LogStep "Get MeetDOW":       o.MeetDOW = Trim$(GetTextOptionalAny(wsSet, "", "MEETING.DOW", "Dan v tednu za sestanek"))
     LogStep "Get MeetNth":       o.MeetNthMonth = Trim$(GetTextOptionalAny(wsSet, "", "MEETING.NTH_MONTH", "Kateri dan v mesecu"))
     LogStep "Get MeetIDsSpec":   o.MeetIDsSpec = Trim$(GetTextOptionalAny(wsSet, "", "MEETING.IDS", "ID-ji zaposlenih"))
-    LogStep "Get MeetNote":      o.MeetNote = Trim$(GetTextOptionalAny(wsSet, "", "MEETING.NOTE", "Opomba (periodièni sestanek)"))
+    LogStep "Get MeetNote":      o.MeetNote = Trim$(GetTextOptionalAny(wsSet, "", "MEETING.NOTE", "Opomba (periodiÃ¨ni sestanek)"))
 
 
 
@@ -596,12 +595,12 @@ Public Function GetLongOptionalAny(ByVal wsSet As Worksheet, ByVal defaultValue 
     End If
 
     If Not IsNumeric(t) Then
-        Err.Raise vbObjectError + 1014, "modSettings", "Vrednost ni številka (aliases): '" & JoinAliases(arr) & "'"
+        Err.Raise vbObjectError + 1014, "modSettings", "Vrednost ni Å¡tevilka (aliases): '" & JoinAliases(arr) & "'"
     End If
     GetLongOptionalAny = CLng(t)
 End Function
 ' =============================================================================
-'   GET DOUBLE OPTIONAL - Vrne decimalno številko iz nastavitev, sicer default
+'   GET DOUBLE OPTIONAL - Vrne decimalno Å¡tevilko iz nastavitev, sicer default
 ' =============================================================================
 Public Function GetDoubleOptionalAny(ByVal wsSet As Worksheet, ByVal defaultValue As Double, ParamArray keyCandidates()) As Double
     Dim i As Long, k As String, r As Long, t As String
@@ -618,7 +617,7 @@ Public Function GetDoubleOptionalAny(ByVal wsSet As Worksheet, ByVal defaultValu
             If IsNumeric(t) Then
                 GetDoubleOptionalAny = CDbl(t)
             Else
-                Err.Raise vbObjectError + 1013, "modSettings", "Vrednost ni številka za kljuè: '" & k & "' (vrednost='" & t & "')"
+                Err.Raise vbObjectError + 1013, "modSettings", "Vrednost ni Å¡tevilka za kljuÃ¨: '" & k & "' (vrednost='" & t & "')"
             End If
             Exit Function
         End If
@@ -919,8 +918,8 @@ Public Sub ValidateSettings()
         "Pot do datoteke GAMA", "Ime lista v GAMA", "Prva vrstica zaposlenih v GAMA", _
         "Zadnja vrstica zaposlenih v GAMA", "Stolpec ID zaposlenega v GAMA (npr. 9)", _
         "Stolpec tima v GAMA (npr. 8)", "Prva vrstica datumov v GAMA", _
-        "DaysWidth", "ZAÈETNI DATUM", "KONÈNI DATUM", _
-        "Prvi stolpec datuma v GAMA (SE PRERAÈUNA AVTOMATSKO)")
+        "DaysWidth", "ZAÃˆETNI DATUM", "KONÃˆNI DATUM", _
+        "Prvi stolpec datuma v GAMA (SE PRERAÃˆUNA AVTOMATSKO)")
 
     Dim errs As Collection: Set errs = New Collection
     Dim i As Long, k As String
@@ -928,13 +927,13 @@ Public Sub ValidateSettings()
     BuildKeyIndex wsSet
     For i = LBound(required) To UBound(required)
         k = CStr(required(i))
-        If KeyRow(wsSet, k) = 0 Then errs.Add "Manjka kljuè: " & k
+        If KeyRow(wsSet, k) = 0 Then errs.Add "Manjka kljuÃ¨: " & k
     Next i
 
     Dim dups As Object: Set dups = GetDuplicateKeys(wsSet)
     Dim dk As Variant
     For Each dk In dups.Keys
-        errs.Add "Duplicate kljuè '" & CStr(dk) & "' v vrsticah: " & CStr(dups(dk))
+        errs.Add "Duplicate kljuÃ¨ '" & CStr(dk) & "' v vrsticah: " & CStr(dups(dk))
     Next dk
 
     Dim s As TMainSettings
@@ -947,16 +946,16 @@ Public Sub ValidateSettings()
     On Error GoTo 0
 
     If s.endDate < s.startDate Then
-        errs.Add "KONÈNI DATUM je pred ZAÈETNI DATUM."
+        errs.Add "KONÃˆNI DATUM je pred ZAÃˆETNI DATUM."
     End If
     If CLng(s.endDate - s.startDate) + 1 <> s.daysWidth Then
-        errs.Add "DaysWidth ni poravnan z datumoma (prièakovano " & (CLng(s.endDate - s.startDate) + 1) & ")."
+        errs.Add "DaysWidth ni poravnan z datumoma (priÃ¨akovano " & (CLng(s.endDate - s.startDate) + 1) & ")."
     End If
 
     Dim wbG As Workbook, wsG As Worksheet
     Set wbG = OpenGamaWorkbook(s.PathGama, True, False)
     If wbG Is Nothing Then
-        errs.Add "GAMA datoteke ni mogoèe odpreti: " & s.PathGama
+        errs.Add "GAMA datoteke ni mogoÃ¨e odpreti: " & s.PathGama
     Else
         Set wsG = GetWorksheetSafe(wbG, s.GamaSheetName)
         If wsG Is Nothing Then
@@ -965,7 +964,7 @@ Public Sub ValidateSettings()
             If Not IsDate(wsG.Cells(s.firstDateRowG, s.GamaStartDateCol).Value) Then
                 errs.Add "GAMA start celica ni datum (" & s.firstDateRowG & "," & s.GamaStartDateCol & ")."
             ElseIf DateValue(wsG.Cells(s.firstDateRowG, s.GamaStartDateCol).Value) <> DateValue(s.startDate) Then
-                errs.Add "Datum v GAMA start stolpcu ni poravnan z ZAÈETNI DATUM."
+                errs.Add "Datum v GAMA start stolpcu ni poravnan z ZAÃˆETNI DATUM."
             End If
 
             Dim units As Object: Set units = BuildUnitDict(s.selectedUnitsText)
